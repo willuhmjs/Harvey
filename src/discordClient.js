@@ -16,7 +16,7 @@ client.once('ready', async () =>  {
     logger.info("Registering discord commands.");
     registeredCommands.forEach(async command => {
 
-        await client.application.commands.create(command.body.toJSON());
+        await client.application.commands.create(command.body.toJSON(), process.env.PROD ? undefined : process.env.GUILD);
 
         client.on('interactionCreate', async interaction => {
             if (!interaction.isCommand()) return;
